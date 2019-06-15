@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue-pro-006</title>
+  </head>
+  <body>
+    <div id="root">
+      <h1>{{ name | lower | upper }}</h1>
+      <h1>{{ profession | upper }}</h1>
+      {{ today | bdFormate }}
+      <!-- <ul>
+        <li v-for="(payment,i) in payments" :key="payment.id">
+          <p>{{ payment.name }} {{ payment.amount }}</p>
+        </li>
+      </ul>
+      <h1>Unpaid payments</h1>
+      <ul>
+        <li v-for="(payment,i) in unpaidpayments" :key="payment.id">
+          <p>{{ payment.name }} {{ payment.amount }}</p>
+        </li>
+      </ul>
+      <h2>Total amount {{ totalAmount }}</h2> -->
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      Vue.filter("lower", function(s) {
+        return s.toLowerCase();
+      });
+      var app = new Vue({
+        el: "#root",
+        data: {
+          name: "imtiaz ahmed epu",
+          profession: "Programmer",
+          today: new Date()
+        },
+        filters: {
+          upper(s) {
+            return s.toUpperCase();
+          },
+          bdFormate(d) {
+            return (
+              d.getUTCDate() +
+              "-" +
+              (d.getUTCMonth() + 1) +
+              "-" +
+              d.getUTCFullYear()
+            );
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
