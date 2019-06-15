@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue-pro-001</title>
+  </head>
+  <body>
+    <div id="root">
+      <h1>Skills</h1>
+      <ul>
+        <li v-for="(skill,i) in skills" :key="skill.id">
+          <p>{{ skill }} <button @click="removeskill(i)">x</button></p>
+        </li>
+      </ul>
+
+      <input v-model="newskill" type="text" />
+      <button @click="addNewSkill">Add</button>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#root",
+        data: {
+          newskill: "",
+          skills: ["html", "css", "PHP", "Laravel", "Vue"]
+        },
+        methods: {
+          addNewSkill() {
+            this.skills.push(this.newskill);
+            this.newskill = "";
+          },
+          removeskill(i) {
+            this.skills.splice(i, 1);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
