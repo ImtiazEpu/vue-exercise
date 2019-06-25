@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Basic component</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div id="root">
+      <div class="container">
+        <panel title="Feature">
+          <H1>Enter Your Name</H1>
+          <input type="text" name="" />
+          <button>Submit</button>
+        </panel>
+      </div>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      Vue.component("panel", {
+        template: `
+            <div class="card mt-5" v-if="show">
+                <h5 class="card-header d-flex justify-content-between">{{title}} <a href="#" class="btn btn-danger" @click="show=false">Close</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title"><slot></slot></h5>
+                    
+                </div>
+            </div>`,
+        props: ["title", "content", "description"],
+        data: function() {
+          return {
+            show: true
+          };
+        }
+      });
+      var app = new Vue({
+        el: "#root",
+        data: {}
+      });
+    </script>
+  </body>
+</html>
