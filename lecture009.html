@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Component communications and custom events</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div id="root">
+      <div class="container">
+        <button class="btn btn-success" @click="showLogin=true">Login</button>
+        <modals v-if="showLogin" @onsave="showLogin=false">
+          <template slot="header">
+            Modal title
+          </template>
+          <template slot="body">
+            Modal body text goes here.
+          </template>
+        </modals>
+      </div>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      Vue.component("modals", {
+        template: `
+        <div class="" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <slot name="header"></slot>
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <slot name="body"></slot>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" @click="$emit('onsave')" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                </div>
+            </div>
+        </div>`,
+        props: ["title", "content", "description"],
+        data: function() {
+          return {
+            show: true
+          };
+        }
+      });
+      var app = new Vue({
+        el: "#root",
+        data: {
+          showLogin: false
+        }
+      });
+    </script>
+  </body>
+</html>
